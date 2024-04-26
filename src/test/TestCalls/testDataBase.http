@@ -1,0 +1,13 @@
+GET http://localhost:8080/rhythmnotes/all
+
+###
+
+# curl http://localhost:8080/rhythmnotes/add -d title=title -d content=content
+POST http://localhost:8080/rhythmnotes/add
+Content-Type: application/x-www-form-urlencoded
+
+title = Test title &
+content = This is some test content!
+
+###
+
