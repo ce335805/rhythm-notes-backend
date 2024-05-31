@@ -2,12 +2,20 @@ GET http://localhost:8080/rhythmnotes/all
 
 ###
 
-# curl http://localhost:8080/rhythmnotes/add -d title=title -d content=content
+# curl http://localhost:8080/rhythmnotes/add -H 'Accept: application/json' -H 'Content-Type: application/json' --data-raw '{"title": "Another test title","content": "This is some test content!","mood": "Still happy!","timeCreated": "1134123412344"}'
 POST http://localhost:8080/rhythmnotes/add
-Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+Content-Type: application/json
 
-title = Test title &
-content = This is some test content!
+{
+  "title": "title",
+  "content": "Here is some content",
+  "mood": "😃",
+  "timeCreated": "1134123412344"
+}
 
 ###
+
+# DELETE request to delete a diary entry
+DELETE http://localhost:8080/rhythmnotes/delete/403
 

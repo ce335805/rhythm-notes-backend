@@ -1,22 +1,29 @@
 package com.rhythmnotes.rhythmnotesbackend.accessingdatamysql;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Note {
+public class DiaryEntry {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @JsonProperty
+    private String timeCreated;
+
+    @JsonProperty
     private String title;
 
+    @JsonProperty
     private String content;
 
-    private String project;
+    @JsonProperty
+    private String mood;
 
     public Integer getId() {
         return id;
@@ -43,11 +50,19 @@ public class Note {
         this.content = content;
     }
 
-    public String getProject() {
-        return project;
+    public String getMood() {
+        return mood;
     }
 
-    public void setProject(String project) {
-        this.project = project;
+    public void setMood(String mood) {
+        this.mood = mood;
+    }
+
+    public String getTimeCreated() {
+        return timeCreated;
+    }
+
+    public void setTimeCreated(String timeCreated) {
+        this.timeCreated = timeCreated;
     }
 }

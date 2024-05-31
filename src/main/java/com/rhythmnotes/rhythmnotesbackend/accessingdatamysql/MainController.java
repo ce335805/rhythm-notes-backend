@@ -2,31 +2,33 @@ package com.rhythmnotes.rhythmnotesbackend.accessingdatamysql;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 
-@Controller
-@RequestMapping(path="/rhythmnotes")
+@RestController
+@RequestMapping(path = "/rhythmnotes")
 public class MainController {
     @Autowired
-    private NoteRepository noteRepository;
+    private DiaryEntryRepository diaryEntryRepository;
 
-    @PostMapping(path="/add")
-    public @ResponseBody String addNote(@RequestParam String title, @RequestParam String content) {
-        Note note = new Note();
-        note.setTitle(title);
-        note.setContent(content);
-        noteRepository.save(note);
+    @PostMapping(path = "/add")
+    public @ResponseBody String addNote(@RequestBody DiaryEntry diaryEntry
+    ) {
+        diaryEntryRepository.save(diaryEntry);
         return "Saved";
     }
 
     @GetMapping(path = "/all")
-    public @ResponseBody Iterable<Note> getAllNotes() {
-        return noteRepository.findAll();
+    public @ResponseBody Iterable<DiaryEntry> getAllNotes() {
+        return diaryEntryRepository.findAll();
+    }
+
+
+    @DeleteMapping(path = "/delete/{id}")
+    public @ResponseBody String deleteNote(@PathVariable int id) {
+        diaryEntryRepository.deleteById(id);
+        return "Diary Entry deleted successfully";
     }
 
 }
+
